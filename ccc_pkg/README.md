@@ -11,7 +11,7 @@
 ### Step:
 
 ```bash
-mkdir -p ~/project_ccc/src
+mkdir ~/project_ccc
 cd ~/project_ccc/
 git clone https://github.com/SaraPettinari/sim_project.git
 mv -v sim_project src
@@ -34,6 +34,11 @@ export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:<path_to_your_directory>/models
 
 ```bash
 ros2 launch ccc_pkg simulation.launch.py
+```
+
+## RUN controller
+```bash
+ros2 launch ccc_pkg controllers.launch.py
 ```
 
 ### Organizzazione cartelle
