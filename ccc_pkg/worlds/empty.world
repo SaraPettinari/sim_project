@@ -10,11 +10,28 @@
       <uri>model://ground_plane</uri>
     </include>
 
+
     <include>
       <pose>5 5 0 0 0 0</pose>
-      <uri>model://fire_hydrant</uri>
+      <uri>model://recinto</uri>
     </include>
 
+    <population name="box_population1">
+      <model name="box1">
+        <include>
+          <static>true</static>
+          <uri>model://box</uri>
+        </include>
+      </model>
+      <pose>5.5 5 0 0 0 0</pose>
+      <box>
+        <size>8 8 0.01</size>
+      </box>
+      <model_count>4</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
 
   </world>
 </sdf>

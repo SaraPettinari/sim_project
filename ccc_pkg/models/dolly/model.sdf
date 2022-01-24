@@ -3,7 +3,7 @@
   <model name='Dolly'>
     <pose>0 0 0.225 0 -0 0</pose>
 
-    <link name='chassis'>
+    <link name='base_link'>
       <inertial>
         <mass>1.0</mass>
         <inertia>
@@ -45,13 +45,13 @@
             <horizontal>
               <samples>200</samples>
               <resolution>1.0</resolution>
-              <min_angle>-0.6</min_angle>
-              <max_angle>0.6</max_angle>
+              <min_angle>-1.0</min_angle>
+              <max_angle>1.0</max_angle>
             </horizontal>
           </scan>
           <range>
             <min>0.05</min>
-            <max>2.0</max>
+            <max>1.5</max>
           </range>
         </ray>
         <always_on>true</always_on>
@@ -59,7 +59,7 @@
         <update_rate>100.0</update_rate>
         <plugin name="laser" filename="libgazebo_ros_ray_sensor.so">
           <ros>
-            <namespace>/dolly</namespace>
+            <namespace>/</namespace>
             <remapping>~/out:=laser_scan</remapping>
           </ros>
           <output_type>sensor_msgs/LaserScan</output_type>
@@ -265,7 +265,7 @@
     </link>
 
     <joint name='left_wheel_joint' type='revolute'>
-      <parent>chassis</parent>
+      <parent>base_link</parent>
       <child>left_wheel</child>
       <axis>
         <xyz>0 0 1</xyz>
@@ -277,7 +277,7 @@
     </joint>
 
     <joint name='right_wheel_joint' type='revolute'>
-      <parent>chassis</parent>
+      <parent>base_link</parent>
       <child>right_wheel</child>
       <axis>
         <xyz>0 0 1</xyz>
@@ -289,12 +289,12 @@
     </joint>
 
     <joint name='caster_wheel' type='ball'>
-      <parent>chassis</parent>
+      <parent>base_link</parent>
       <child>caster</child>
     </joint>
 
     <joint name='tail_joint' type='revolute'>
-      <parent>chassis</parent>
+      <parent>base_link</parent>
       <child>tail</child>
       <pose>0 0 0.04 0 -0 0</pose>
       <axis>
@@ -327,13 +327,10 @@
       </physics>
     </joint>
 
-    <!--
-        Load Gazebo-ROS's diff-drive controller, which exposes a ROS interface.
-    -->
     <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
 
       <ros>
-        <namespace>/dolly</namespace>
+        <namespace>/</namespace>
       </ros>
 
       <!-- wheels -->
@@ -352,8 +349,8 @@
       <publish_odom>true</publish_odom>
       <publish_odom_tf>true</publish_odom_tf>
 
-      <odometry_frame>odom_demo</odometry_frame>
-      <robot_base_frame>chassis</robot_base_frame>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
 
     </plugin>
 
